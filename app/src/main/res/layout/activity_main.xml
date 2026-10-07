@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/consent"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/serverUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Server URL (e.g. https://xxxx.ngrok-free.app)"
+            android:inputType="textUri" />
+
+        <EditText
+            android:id="@+id/apiKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="API key (optional)"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:id="@+id/facePreview"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
+            android:background="#22888888"
+            android:scaleType="centerCrop" />
+
+        <Button
+            android:id="@+id/pickFace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Pick source face (image)" />
+
+        <TextView
+            android:id="@+id/videoLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="No video selected" />
+
+        <Button
+            android:id="@+id/pickVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Pick target video" />
+
+        <CheckBox
+            android:id="@+id/enhance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Face enhancer (slower, better quality)" />
+
+        <CheckBox
+            android:id="@+id/consentCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I have permission from the people shown" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. Start swap" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Idle" />
+
+        <VideoView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save to gallery"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

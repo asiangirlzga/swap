@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Roop Face Swap</string>
+    <string name="consent">Only use photos and videos of people who have given you permission. Do not use this app to deceive, harass or impersonate anyone. Label swapped media as AI-edited when sharing.</string>
+</resources>
