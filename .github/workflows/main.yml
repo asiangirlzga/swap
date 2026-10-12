@@ -9,19 +9,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: android_app
     steps:
       - uses: actions/checkout@v4
+
+      # Works whether the app sits in android_app/ or at the repo root.
+      - name: Locate Gradle project
+        run: |
+          f=$(find . -name settings.gradle.kts -not -path '*/.git/*' | head -n 1)
+          if [ -z "$f" ]; then
+            echo "No settings.gradle.kts found in the repo. Files present:"; ls -R | head -50; exit 1
+          fi
+          echo "PROJECT_DIR=$(dirname "$f")" >> "$GITHUB_ENV"
+          echo "Using project dir: $(dirname "$f")"
 
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      # ubuntu-latest already includes the Android SDK (ANDROID_HOME), so no SDK setup step is needed.
-      # Gradle's AGP downloads any missing platform/build-tools once licenses are accepted.
+      # ubuntu-latest already includes the Android SDK (ANDROID_HOME).
       - name: Accept Android SDK licenses
         run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
@@ -31,10 +37,11 @@ jobs:
           gradle-version: 8.9
 
       - name: Build debug APK
+        working-directory: ${{ env.PROJECT_DIR }}
         run: gradle assembleDebug --stacktrace
 
       - uses: actions/upload-artifact@v4
         with:
           name: faceswap-debug-apk
-          path: android_app/app/build/outputs/apk/debug/*.apk
+          path: ${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
